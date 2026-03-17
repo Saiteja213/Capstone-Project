@@ -1,0 +1,60 @@
+# =====================
+
+# React (Frontend)
+
+# =====================
+
+frontend/node_modules/
+frontend/build/
+frontend/.env
+frontend/.cache
+
+# =====================
+
+# Spring Boot (Backend)
+
+# =====================
+
+backend/target/
+backend/*.log
+backend/.mvn/
+
+# =====================
+
+# Logs
+
+# =====================
+
+*.log
+logs/
+
+# =====================
+
+# Environment Variables
+
+# =====================
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =====================
+
+# IDE Files
+
+# =====================
+
+.idea/
+.vscode/
+*.iml
+
+# =====================
+
+# OS Files
+
+# =====================
+
+.DS_Store
+Thumbs.db
