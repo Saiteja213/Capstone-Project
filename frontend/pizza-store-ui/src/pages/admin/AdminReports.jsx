@@ -4,129 +4,139 @@ import "../../styles/AdminReports.css";
 
 function AdminReports(){
 
-// ==============================
+// =====================================
+// BASE URL FOR ORDER SERVICE
+// (Change port if your order-service
+// runs on a different port)
+// =====================================
+
+const API_BASE = "http://localhost:8083";
+
+// =====================================
 // STATE VARIABLES
-// ==============================
+// =====================================
 
-const [dailySales,setDailySales] = useState(0);
-const [monthlySales,setMonthlySales] = useState([]);
-const [revenue,setRevenue] = useState(0);
-const [topPizza,setTopPizza] = useState([]);
-const [orderTrends,setOrderTrends] = useState([]);
-const [menuMap,setMenuMap] = useState({});
-const [totalOrders,setTotalOrders] = useState(0);
+const [dailySales,setDailySales] = useState(0);        // today's sales
+const [monthlySales,setMonthlySales] = useState([]);   // monthly revenue data
+const [revenue,setRevenue] = useState(0);              // total revenue
+const [topPizza,setTopPizza] = useState([]);           // top selling pizzas
+const [orderTrends,setOrderTrends] = useState([]);     // orders per day
+const [totalOrders,setTotalOrders] = useState(0);      // total number of orders
 
-
-// ==============================
-// LOAD REPORTS
-// ==============================
+// =====================================
+// LOAD REPORT DATA WHEN PAGE LOADS
+// =====================================
 
 useEffect(()=>{
 loadReports();
 },[]);
 
-
-// ==============================
-// FETCH DATA
-// ==============================
+// =====================================
+// FUNCTION TO FETCH REPORT DATA
+// =====================================
 
 const loadReports = async ()=>{
 
 try{
 
+// get JWT token stored during login
 const token = sessionStorage.getItem("token");
 
+// attach token in Authorization header
 const headers = {
 Authorization:`Bearer ${token}`
 };
 
-
+// =====================================
 // DAILY SALES
+// =====================================
+
 const daily = await axios.get(
-"http://localhost:8080/api/orders/reports/daily-sales",
+`${API_BASE}/api/orders/reports/daily-sales`,
 {headers}
 );
 
 setDailySales(daily.data || 0);
 
-
+// =====================================
 // MONTHLY SALES
+// =====================================
+
 const monthly = await axios.get(
-"http://localhost:8080/api/orders/reports/monthly-sales",
+`${API_BASE}/api/orders/reports/monthly-sales`,
 {headers}
 );
 
 setMonthlySales(monthly.data || []);
 
-
+// =====================================
 // TOTAL REVENUE
+// =====================================
+
 const revenueRes = await axios.get(
-"http://localhost:8080/api/orders/reports/revenue",
+`${API_BASE}/api/orders/reports/revenue`,
 {headers}
 );
 
 setRevenue(revenueRes.data || 0);
 
+// =====================================
+// TOP SELLING PIZZA
+// =====================================
 
-// TOP PIZZA
 const pizzaRes = await axios.get(
-"http://localhost:8080/api/orders/reports/top-pizza",
+`${API_BASE}/api/orders/reports/top-pizza`,
 {headers}
 );
 
 setTopPizza(pizzaRes.data || []);
 
+// =====================================
+// ORDER TRENDS (ORDERS PER DAY)
+// =====================================
 
-// ORDER TRENDS
 const trendsRes = await axios.get(
-"http://localhost:8080/api/orders/reports/order-trends",
+`${API_BASE}/api/orders/reports/order-trends`,
 {headers}
 );
 
 setOrderTrends(trendsRes.data || []);
 
+// =====================================
+// TOTAL ORDERS CALCULATION
+// =====================================
 
-// TOTAL ORDERS
 const total = trendsRes.data.reduce((sum,o)=>sum+o[1],0);
+
 setTotalOrders(total);
-
-
-// MENU ITEMS
-const menuRes = await axios.get(
-"http://localhost:8080/api/menu",
-{ headers }
-);
-
-const map = {};
-
-menuRes.data.forEach(m=>{
-map[m.menuId] = m.name;
-});
-
-setMenuMap(map);
 
 }
 catch(error){
 
+// log error in console
 console.error("Error loading reports:",error);
 
 }
 
 };
 
-
-// ==============================
+// =====================================
 // CALCULATIONS
-// ==============================
+// =====================================
 
-const avgOrderValue = totalOrders ? Math.round(revenue / totalOrders) : 0;
+// average order value
+const avgOrderValue = totalOrders
+? Math.round(revenue / totalOrders)
+: 0;
 
-const maxPizza = topPizza.length ? topPizza[0][1] : 0;
+// maximum pizza sales (used for progress bar)
+const maxPizza = topPizza.length
+? topPizza[0][1]
+: 0;
 
-
-// ==============================
+// =====================================
 // UI
-// ==============================
+// =====================================
 
 return(
 
@@ -135,8 +145,9 @@ return(
 <h2 className="page-title">Reports & Analytics</h2>
 <p className="page-sub">Performance at a glance</p>
 
-
-{/* KPI CARDS */}
+{/* ===================================== */
+/* KPI CARDS */
+/* ===================================== */}
 
 <div className="kpi-row">
 
@@ -146,20 +157,17 @@ return(
 <span className="up">↑ This month</span>
 </div>
 
-
 <div className="kpi">
 <p>Daily Sales</p>
 <h3>₹{dailySales}</h3>
 <span>{dailySales ? "Today's revenue" : "No orders today"}</span>
 </div>
 
-
 <div className="kpi">
 <p>Total Orders</p>
 <h3>{totalOrders}</h3>
 <span>Orders processed</span>
 </div>
-
 
 <div className="kpi">
 <p>Avg Order Value</p>
@@ -169,8 +177,9 @@ return(
 
 </div>
 
-
-{/* ORDER TRENDS */}
+{/* ===================================== */
+/* ORDER TRENDS CHART */
+/* ===================================== */}
 
 <div className="chart-card">
 
@@ -180,6 +189,7 @@ return(
 
 {(() => {
 
+// find max orders to scale chart bars
 const maxOrders = Math.max(...orderTrends.map(o => o[1]),1);
 
 return orderTrends.map((o,i)=>{
@@ -211,8 +221,9 @@ style={{height:`${height}px`}}
 
 </div>
 
-
-{/* MONTHLY REVENUE */}
+{/* ===================================== */
+/* MONTHLY REVENUE TABLE */
+/* ===================================== */}
 
 <div className="table-card">
 
@@ -232,6 +243,7 @@ style={{height:`${height}px`}}
 
 {monthlySales.map((m,i)=>{
 
+// calculate orders in that month
 const ordersCount = orderTrends
 .filter(o => new Date(o[0]).getMonth()+1 === m[0])
 .reduce((sum,o)=>sum+o[1],0);
@@ -260,8 +272,9 @@ return(
 
 </div>
 
-
-{/* TOP SELLING ITEMS */}
+{/* ===================================== */
+/* TOP SELLING ITEMS */
+/* ===================================== */}
 
 <div className="table-card">
 
@@ -282,6 +295,7 @@ return(
 
 {topPizza.map((p,i)=>{
 
+// progress bar percentage
 const percent = maxPizza ? (p[1]/maxPizza)*100 : 0;
 
 return(
