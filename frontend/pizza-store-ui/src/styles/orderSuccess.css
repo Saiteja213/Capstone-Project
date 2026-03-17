@@ -1,0 +1,89 @@
+.success-container{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+background:#f7f7f7;
+padding:40px;
+}
+
+.success-card{
+background:white;
+padding:35px;
+width:650px;                 /* increased width for desktop */
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.12);
+text-align:center;
+}
+
+/* Success Icon */
+.icon{
+font-size:55px;
+color:#2bb673;
+margin-bottom:10px;
+}
+
+/* Subtitle text */
+.subtitle{
+color:#555;
+margin-bottom:20px;
+line-height:1.5;
+}
+
+/* Summary Title */
+.summary-title{
+margin-top:25px;
+margin-bottom:12px;
+text-align:left;
+font-size:18px;
+}
+
+/* Order Summary */
+.summary{
+border-top:1px solid #eee;
+padding-top:12px;
+}
+
+/* Summary rows */
+.row{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+font-size:15px;
+}
+
+/* Back to Home button (orange theme) */
+/* Buttons (Back to Home / View My Orders) */
+.home-btn{
+margin-top:25px;
+background:#ae4504;   /* red */
+color:white;
+padding:13px;
+border:none;
+border-radius:8px;
+width:100%;
+font-size:16px;
+cursor:pointer;
+font-weight:600;
+}
+
+.home-btn:hover{
+background:#ae4504;   /* darker red */
+}
+
+/* Links section */
+.links{
+margin-top:18px;
+display:flex;
+justify-content:space-between;
+font-size:14px;
+}
+
+.links a{
+color:#3a7bd5;
+text-decoration:none;
+}
+
+.links a:hover{
+text-decoration:underline;
+}

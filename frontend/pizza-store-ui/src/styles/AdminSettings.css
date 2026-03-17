@@ -1,0 +1,80 @@
+/* ============================= */
+/* SETTINGS PAGE */
+/* ============================= */
+
+.settings-container{
+padding:20px;
+}
+
+.settings-title{
+font-size:22px;
+margin-bottom:20px;
+}
+
+/* GRID LAYOUT */
+
+.settings-grid{
+display:flex;
+gap:20px;
+}
+
+
+/* PROFILE CARD */
+
+.profile-card{
+background:white;
+padding:20px;
+border-radius:10px;
+width:300px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.profile-card h3{
+margin-bottom:10px;
+}
+
+.profile-card p{
+margin:6px 0;
+}
+
+
+/* PASSWORD CARD */
+
+.password-card{
+background:white;
+padding:20px;
+border-radius:10px;
+width:350px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.password-card input{
+padding:10px;
+border-radius:6px;
+border:1px solid #ddd;
+}
+
+.password-card input:focus{
+outline:none;
+border-color:#e65100;
+}
+
+
+/* UPDATE BUTTON */
+
+.update-btn{
+background:#e65100;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+font-weight:500;
+}
+
+.update-btn:hover{
+background:#bf360c;
+}

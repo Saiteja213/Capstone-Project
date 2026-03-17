@@ -1,0 +1,47 @@
+.settings-container{
+padding:20px;
+}
+
+.settings-title{
+font-size:22px;
+margin-bottom:20px;
+}
+
+.settings-grid{
+display:flex;
+gap:20px;
+}
+
+.profile-card{
+background:white;
+padding:20px;
+border-radius:10px;
+width:300px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.password-card{
+background:white;
+padding:20px;
+border-radius:10px;
+width:350px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.password-card input{
+padding:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.update-btn{
+background:#ff6b00;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+}

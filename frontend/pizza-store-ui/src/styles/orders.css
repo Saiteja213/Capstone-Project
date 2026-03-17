@@ -1,0 +1,122 @@
+.orders-page{
+padding:90px 60px 40px;
+width:100%;
+max-width:1200px;
+margin:auto;
+}
+
+.orders-page h2{
+margin-bottom:25px;
+font-size:28px;
+font-weight:600;
+}
+
+
+/* ORDER CARD */
+
+.order-card{
+background:white;
+padding:22px 25px;
+border-radius:14px;
+margin-bottom:25px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+border:1px solid #f1f1f1;
+transition:all 0.2s ease;
+}
+
+.order-card:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 22px rgba(0,0,0,0.12);
+}
+
+
+/* ORDER HEADER */
+
+.order-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+}
+
+.order-id{
+font-size:20px;
+font-weight:600;
+}
+
+.order-date{
+font-size:14px;
+color:#777;
+}
+
+
+/* ORDER ITEMS */
+
+.order-items{
+border-top:1px solid #eee;
+padding-top:12px;
+margin-top:8px;
+}
+
+.order-items p{
+display:flex;
+justify-content:space-between;
+padding:5px 0;
+font-size:15px;
+color:#444;
+}
+
+
+/* TOTAL */
+
+.order-total{
+margin-top:12px;
+font-size:18px;
+font-weight:600;
+}
+
+
+/* STATUS BADGES */
+
+.status{
+margin-top:10px;
+font-size:14px;
+font-weight:600;
+padding:6px 14px;
+display:inline-block;
+border-radius:20px;
+}
+
+.status.pending{
+background:#fff3e0;
+color:#f57c00;
+}
+
+.status.preparing{
+background:#e3f2fd;
+color:#1976d2;
+}
+
+.status.out_for_delivery{
+background:#ede7f6;
+color:#6a1b9a;
+}
+
+.status.delivered{
+background:#e8f5e9;
+color:#2e7d32;
+}
+
+.status.rejected{
+background:#ffebee;
+color:#c62828;
+}
+
+
+/* ERROR */
+
+.error{
+color:red;
+font-weight:500;
+margin-top:10px;
+}
